@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+
+import sys
+
+def factorize(n):
+    """Factorize the given number n into a product of two smaller numbers.
+    Return: 
+        a tuple (p, q) and where p and q are the factors of n.
+    """
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return (i, n // i)
+    return None
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print('Usage: factors <file>')
+        sys.exit(1)
+    
+    filename = sys.argv[1]
+    
+    with open(filename) as fi:
+        for line in fi:
+            num = int(line.strip())
+            factors = factorize(num)
+            if factors:
+                print('{}={}*{}'.format(num, factors[0], factors[1]))
+
